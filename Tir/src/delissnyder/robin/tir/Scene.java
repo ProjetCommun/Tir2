@@ -63,7 +63,7 @@ public class Scene extends JPanel
 		this.yCible1 = 250;
 		this.vieCible1 = 10;
 		this.randomCounter=0;
-		this.vieJoueur=3;
+		this.vieJoueur=5;
 		
 		this.FinCiblex=false;
 		this.FinCibley=false;
@@ -162,7 +162,7 @@ public class Scene extends JPanel
 		case 0:
 			this.defaite=true;
 			break;
-		case 3:
+		case 5:
 			this.defaite=false;
 			break;
 		}

@@ -18,7 +18,7 @@ public class Clavier implements KeyListener
 			if(Main.scene.isDefaite()==true||Main.scene.isVictoire()==true)
 			{
 				Main.scene.setVieCible1(10);
-				Main.scene.setVieJoueur(3);
+				Main.scene.setVieJoueur(5);
 				Main.scene.setxCible1(5);
 				Main.scene.setyCible1(250);
 				break;
