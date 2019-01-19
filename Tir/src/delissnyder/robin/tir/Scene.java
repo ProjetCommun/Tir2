@@ -39,6 +39,7 @@ public class Scene extends JPanel
 	private boolean fourth;
 	private boolean third;
 	private boolean second;
+	
 	private Thread chronoEcran;
 	
 	private Graphics g2;
@@ -80,42 +81,60 @@ public class Scene extends JPanel
 		chronoEcran = new Thread(new ChronoDepart());
 		chronoEcran.start();
 	}
-	@SuppressWarnings("static-access")
 	public void deplacementsCibles()
 	{
-		if(this.xCible1>=0&&this.xCible1<=935)
+		if(this.random==true)
 		{
-		}else
-		{
-			this.FinCiblex=true;
-		}
-		if(this.yCible1>=0&&this.yCible1<=665)
-		{
-		}else
-		{
-			this.FinCibley=true;
-		}
-		if(this.FinCiblex==true)
-		{
-			this.dxCible1=-this.dxCible1;
-			if(this.xCible1<=10)
+			if(this.xCible1<=0)
 			{
-				this.FinCiblex=false;
+				this.xCible1=1;
+			}else
+			if(this.xCible1>=935)
+			{
+				this.xCible1=934;
+			}
+			if(this.yCible1<=0)
+			{
+				this.yCible1=1;
+			}else
+			if(this.yCible1>=665)
+			{
+				this.yCible1=664;
 			}
 		}
-		if(this.FinCibley==true)
+		else
 		{
-			this.dyCible1=-this.dyCible1;
-			if(this.yCible1<=10)
+			if(this.xCible1>=0&&this.xCible1<=935)
 			{
-				this.FinCibley=false;
+			}else
+			{
+				this.FinCiblex=true;
+			}
+			if(this.FinCiblex==true)
+			{
+				this.dxCible1=-this.dxCible1;
+				if(this.xCible1<=10)
+				{
+					this.FinCiblex=false;
+				}
+			}
+			if(this.yCible1>=0&&this.yCible1<=665)
+			{
+			}else
+			{
+				this.FinCibley=true;
+			}
+			if(this.FinCibley==true)
+			{
+				this.dyCible1=-this.dyCible1;
+				if(this.yCible1<=10)
+				{
+					this.FinCibley=false;
+				}
 			}
 		}
 		if(this.victoire==true||this.defaite==true) {this.dxCible1=0; this.dyCible1=0;}
-		this.xCible1 = this.xCible1+this.dxCible1;
-		this.yCible1 = this.yCible1+this.dyCible1;
 	}
-	@SuppressWarnings("static-access")
 	public void contactTir()
 	{
 		if(this.click==true || Souris.getxSouris()<this.xCible1 || Souris.getxSouris()>this.xCible1+50 || 
@@ -201,24 +220,12 @@ public class Scene extends JPanel
 			break;
 		}
 	}
-
 	public void randomGen()
 	{
 		if(this.random==true)
 		{
 			this.randomCounter=this.randomCounter+1;
-			if(second==true)
-			{
-				this.dxCible1=-this.dxCible1;
-			}else if(third==true)
-			{
-				this.dxCible1 =-this.dxCible1;
-				this.dyCible1 =-this.dyCible1;
-			}else if(fourth==true)
-			{
-				this.dyCible1 =-this.dyCible1;
-			}	
-			if(this.randomCounter==20)
+			if(this.randomCounter>=35)
 			{
 				int randomGen = (int)(Math.random()*100); 
 				if(randomGen<25&&randomGen>0)
@@ -251,8 +258,20 @@ public class Scene extends JPanel
 					this.randomCounter=0;
 				}
 			}
-		
+			if(second==true)
+			{
+				this.dxCible1=-this.dxCible1;
+			}else if(third==true)
+			{
+				this.dxCible1 =-this.dxCible1;
+				this.dyCible1 =-this.dyCible1;
+			}else if(fourth==true)
+			{
+				this.dyCible1 =-this.dyCible1;
+			}	
 		}
+		this.xCible1 = this.xCible1+this.dxCible1;
+		this.yCible1 = this.yCible1+this.dyCible1;
 	}
 	//GETTERS/SETTERS
 	public Graphics getG2()
@@ -336,9 +355,7 @@ public class Scene extends JPanel
 		this.contactTir();
 		this.deplacementsCibles();
 		this.randomGen();
-		System.out.println(vieJoueur);
 		g2.drawImage(imgCible1, xCible1, yCible1, null);
-		
 		if(SourisBoutons.isClicked()==true)
 		{
 			this.icoViseur = new ImageIcon(getClass().getResource("/images/ViseurClick.png"));
